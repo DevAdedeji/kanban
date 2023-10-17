@@ -1,5 +1,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {
+    head: {
+      title: "Kanban - Manage your tasks",
+    },
+  },
   colorMode: {
     preference: "system",
     classSuffix: "",
