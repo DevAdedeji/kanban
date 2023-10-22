@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white dark:bg-dark_gray h-screen w-[300px]">
     <div class="p-6">
-      <img v-if="theme === 'light'" src="/logo_light.png" />
+      <img v-if="isDark" src="/logo_light.png" />
       <img v-else src="/logo_dark.png" />
     </div>
     <div class="pt-14">
@@ -64,7 +64,14 @@
 </template>
 
 <script setup lang="ts">
-const { getTheme } = useTheme();
-const theme = getTheme();
+const colorMode = useColorMode();
+const isDark = computed({
+  get() {
+    return colorMode.value === "dark";
+  },
+  set() {
+    colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
+  },
+});
 const active = ref<Boolean>(true);
 </script>
