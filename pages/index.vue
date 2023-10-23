@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- Your component's HTML goes here -->
+  <div class="h-[200vh]">
+    <p class="text-blue">Your component's HTML goes here</p>
   </div>
 </template>
 

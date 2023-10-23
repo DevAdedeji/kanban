@@ -1,8 +1,10 @@
 <template>
-  <div class="bg-white dark:bg-dark_gray h-screen w-[300px]">
+  <div
+    class="fixed top-0 left-0 bottom-0 bg-white dark:bg-dark_gray h-screen w-[300px]"
+  >
     <div class="p-6">
-      <img v-if="isDark" src="/logo_light.png" />
-      <img v-else src="/logo_dark.png" />
+      <img v-if="!isDark" src="/logo_light.png" />
+      <img v-if="isDark" src="/logo_dark.png" />
     </div>
     <div class="pt-14">
       <p
@@ -60,11 +62,37 @@
         </li>
       </ul>
     </div>
+    <div class="w-full absolute bottom-6 px-6">
+      <div
+        class="flex items-center justify-center gap-6 bg-light_gray dark:bg-dark_gray h-[48px] rounded"
+      >
+        <img
+          src="/sun.png"
+          class="cursor-pointer"
+          @click="toggleTheme('light')"
+        />
+        <UToggle v-model="selected" color="white" class="!bg-blue" />
+        <img
+          src="/night.png"
+          class="cursor-pointer"
+          @click="toggleTheme('dark')"
+        />
+      </div>
+      <div
+        class="flex items-center gap-2 mt-4 cursor-pointer"
+        @click="$emit('close')"
+      >
+        <img src="/eye-slash.png" />
+        <p class="text-medium_gray font-semibold">Hide Sidebar</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const colorMode = useColorMode();
+defineEmits(["close"]);
+
 const isDark = computed({
   get() {
     return colorMode.value === "dark";
@@ -73,5 +101,25 @@ const isDark = computed({
     colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
   },
 });
+
+const toggleTheme = (val: string) => {
+  colorMode.preference = val;
+};
+
 const active = ref<Boolean>(true);
+const selected = ref(false);
+onBeforeMount(() => {
+  if (colorMode.preference === "dark") {
+    selected.value = true;
+  } else {
+    selected.value = false;
+  }
+});
+watch(selected, (val) => {
+  if (val) {
+    toggleTheme("dark");
+  } else {
+    toggleTheme("light");
+  }
+});
 </script>
