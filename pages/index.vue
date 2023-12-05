@@ -1,7 +1,5 @@
 <template>
-  <div class="h-[200vh]">
-    <p class="text-blue">Your component's HTML goes here</p>
-  </div>
+  <div class="h-[200vh]"></div>
 </template>
 
 <script setup>

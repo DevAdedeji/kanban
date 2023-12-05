@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    "@nuxtjs/supabase",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
     "@vueuse/nuxt",
@@ -18,7 +17,4 @@ export default defineNuxtConfig({
   ],
   css: ["/assets/css/main.css"],
   plugins: [],
-  supabase: {
-    redirect: false,
-  },
 });

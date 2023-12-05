@@ -1,16 +1,16 @@
 <template>
-  <div
+  <aside
     class="fixed top-0 left-0 bottom-0 bg-white dark:bg-dark_gray h-screen w-[300px]"
   >
-    <div class="p-6">
-      <img v-if="!isDark" src="/logo_light.png" />
-      <img v-if="isDark" src="/logo_dark.png" />
+    <div class="px-6 h-24 flex items-center justify-center">
+      <img v-if="!isDark" src="/logo_light.png" alt="Kanban logo" />
+      <img v-if="isDark" src="/logo_dark.png" alt="Kanban logo" />
     </div>
     <div class="pt-14">
       <p
         class="px-6 text-medium_gray text-xs uppercase tracking-[2.4px] font-bold"
       >
-        All boards (0)
+        All boards (1)
       </p>
       <ul class="mt-5 flex flex-col gap-2 w-[276px]">
         <li
@@ -39,7 +39,7 @@
             Platform Launch
           </p>
         </li>
-        <li
+        <!-- <li
           v-for="i in 3"
           :key="i"
           class="px-6 flex items-center gap-4 h-[48px] cursor-pointer hover:text-blue"
@@ -59,34 +59,45 @@
             />
           </svg>
           <p class="text-medium_gray">Platform Launch</p>
-        </li>
+        </li> -->
       </ul>
     </div>
     <div class="w-full absolute bottom-6 px-6">
       <div
         class="flex items-center justify-center gap-6 bg-light_gray dark:bg-dark_gray h-[48px] rounded"
       >
-        <img
-          src="/sun.png"
+        <button
           class="cursor-pointer"
+          aria-label="Turn on light mode display"
           @click="toggleTheme('light')"
+        >
+          <img src="/sun.png" />
+        </button>
+        <UToggle
+          v-model="darkMode"
+          color="white"
+          class="!bg-blue"
+          aria-label="Toggle display mode"
         />
-        <UToggle v-model="selected" color="white" class="!bg-blue" />
-        <img
-          src="/night.png"
+        <button
           class="cursor-pointer"
+          aria-label="Turn on dark mode display"
           @click="toggleTheme('dark')"
-        />
+        >
+          <img src="/night.png" />
+        </button>
       </div>
-      <div
+      <button
         class="flex items-center gap-2 mt-4 cursor-pointer"
+        type="button"
+        aria-label="Hide sidebar button"
         @click="$emit('close')"
       >
         <img src="/eye-slash.png" />
         <p class="text-medium_gray font-semibold">Hide Sidebar</p>
-      </div>
+      </button>
     </div>
-  </div>
+  </aside>
 </template>
 
 <script setup lang="ts">
@@ -107,15 +118,15 @@ const toggleTheme = (val: string) => {
 };
 
 const active = ref<Boolean>(true);
-const selected = ref(false);
+const darkMode = ref(false);
 onBeforeMount(() => {
   if (colorMode.preference === "dark") {
-    selected.value = true;
+    darkMode.value = true;
   } else {
-    selected.value = false;
+    darkMode.value = false;
   }
 });
-watch(selected, (val) => {
+watch(darkMode, (val) => {
   if (val) {
     toggleTheme("dark");
   } else {
