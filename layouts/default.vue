@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full h-full bg-lighter_gray dark:bg-light_black">
+  <div class="flex w-full h-full bg-lighter_gray dark:bg-light_black relative">
     <SideBar v-if="showSidebar" @close="showSidebar = false" />
     <div v-else class="fixed top-0 left-0 bottom-0">
       <button

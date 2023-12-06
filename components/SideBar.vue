@@ -77,7 +77,6 @@
         </button>
         <UToggle
           v-model="darkMode"
-          color="white"
           class="!bg-blue"
           aria-label="Toggle display mode"
         />

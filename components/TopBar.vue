@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full bg-white dark:bg-dark_gray h-24 flex items-center justify-between px-6 relative"
+    class="w-full bg-white dark:bg-dark_gray h-24 flex items-center justify-between px-6 sticky top-0"
   >
     <div class="flex items-center gap-6">
       <div v-if="!showSidebar" class="p-6">
@@ -12,7 +12,7 @@
       </h2>
     </div>
     <div class="flex items-center gap-6">
-      <CustomKButton size="sm" type="primary">
+      <CustomKButton size="sm" type="primary" @click="toggleCreateTaskModal">
         <img src="@/assets/icons/plus.svg" />
         <p class="text-white text-sm">Add New Task</p>
       </CustomKButton>
@@ -46,6 +46,7 @@ defineProps({
   },
 });
 const colorMode = useColorMode();
+const { toggleCreateTaskModal } = useCreateTaskModal();
 
 const showBoardOptions = ref<boolean>(false);
 
