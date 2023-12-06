@@ -38,7 +38,7 @@
             />
           </svg>
           <p :class="active ? 'text-white' : 'text-medium_gray'">
-            Platform Launch
+            {{ "Demo Project" }}
           </p>
         </li>
         <!-- <li
@@ -135,19 +135,3 @@ watch(darkMode, (val) => {
   }
 });
 </script>
-
-<style scoped>
-.styled_scrollbar::-webkit-scrollbar {
-  width: 4px; /* width of the entire scrollbar */
-}
-
-.styled_scrollbar::-webkit-scrollbar-track {
-  background: transparent; /* color of the tracking area */
-}
-
-.styled_scrollbar::-webkit-scrollbar-thumb {
-  background-color: #828fa3; /* color of the scroll thumb */
-  border-radius: 20px; /* roundness of the scroll thumb */
-  border: 3px solid transparent; /* creates padding around scroll thumb */
-}
-</style>

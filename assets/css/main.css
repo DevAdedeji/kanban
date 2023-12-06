@@ -9,3 +9,64 @@
 html {
   scroll-behavior: smooth;
 }
+
+
+.form-box{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-box label{
+  font-size: 14px;
+  color: #828FA3;
+}
+
+.form-box input{
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #979797;
+  outline: none;
+  padding: 0 16px;
+  background: transparent;
+  font-size: 14px;
+}
+
+.form-box input:focus{
+  border: 1px solid #635FC7;
+}
+
+.form-box input::placeholder{
+  color: #828FA3;
+}
+
+.form-box textarea{
+  border-radius: 4px;
+  border: 1px solid #979797;
+  outline: none;
+  padding: 16px;
+  background: transparent;
+  font-size: 14px;
+}
+
+.form-box textarea:focus{
+  border: 1px solid #635FC7;
+}
+
+.form-box textarea::placeholder{
+  color: #828FA3;
+}
+
+.styled_scrollbar::-webkit-scrollbar {
+  width: 4px; /* width of the entire scrollbar */
+}
+
+.styled_scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* color of the tracking area */
+}
+
+.styled_scrollbar::-webkit-scrollbar-thumb {
+  background-color: #828fa3; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid transparent; /* creates padding around scroll thumb */
+}

@@ -8,7 +8,7 @@
         <img v-if="isDark" src="/logo_dark.png" alt="Kanban logo" />
       </div>
       <h2 class="text-black dark:text-white text-2xl font-semibold">
-        Platform Launch
+        {{ "Demo Project" }}
       </h2>
     </div>
     <div class="flex items-center gap-6">
@@ -17,7 +17,7 @@
         <p class="text-white text-sm">Add New Task</p>
       </CustomKButton>
       <button
-        class="cursor-pointer"
+        class="cursor-pointer p-2"
         type="button"
         aria-label="Toggle board option"
         @click="showBoardOptions = !showBoardOptions"
@@ -27,6 +27,7 @@
     </div>
     <div
       v-if="showBoardOptions"
+      ref="boardOptions"
       class="bg-white dark:bg-dark_gray absolute right-6 top-24 shadow p-4 rounded"
     >
       <ul class="flex flex-col gap-2">
@@ -40,6 +41,7 @@
 </template>
 
 <script setup lang="ts">
+import { onClickOutside } from "@vueuse/core";
 defineProps({
   showSidebar: {
     type: Boolean,
@@ -49,6 +51,7 @@ const colorMode = useColorMode();
 const { toggleCreateTaskModal } = useCreateTaskModal();
 
 const showBoardOptions = ref<boolean>(false);
+const boardOptions = ref<HTMLDivElement | null>(null);
 
 const isDark = computed({
   get() {
@@ -57,5 +60,9 @@ const isDark = computed({
   set() {
     colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
   },
+});
+
+onClickOutside(boardOptions, (_event) => {
+  showBoardOptions.value = false;
 });
 </script>
