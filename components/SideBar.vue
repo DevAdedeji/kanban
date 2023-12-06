@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fixed top-0 left-0 bottom-0 bg-white dark:bg-dark_gray h-screen w-[300px]"
+    class="fixed top-0 left-0 bottom-0 bg-white dark:bg-dark_gray h-screen w-[300px] overflow-y-hidden"
   >
     <div class="px-6 h-24 flex items-center justify-center">
       <img v-if="!isDark" src="/logo_light.png" alt="Kanban logo" />
@@ -12,9 +12,11 @@
       >
         All boards (1)
       </p>
-      <ul class="mt-5 flex flex-col gap-2 w-[276px]">
+      <ul
+        class="mt-5 flex flex-col gap-2 w-full styled_scrollbar overflow-y-auto min-h-[50vh] h-[50vh] max-h-[50vh]"
+      >
         <li
-          class="px-6 flex items-center gap-4 h-[48px] cursor-pointer"
+          class="px-6 flex items-center gap-4 min-h-[48px] h-[48px] cursor-pointer"
           :class="
             active
               ? 'bg-blue rounded-tr-[100px] rounded-br-[100px]'
@@ -40,9 +42,9 @@
           </p>
         </li>
         <!-- <li
-          v-for="i in 3"
+          v-for="i in 10"
           :key="i"
-          class="px-6 flex items-center gap-4 h-[48px] cursor-pointer hover:text-blue"
+          class="px-6 flex items-center gap-4 min-h-[48px] h-[48px] cursor-pointer hover:text-blue"
         >
           <svg
             width="16"
@@ -62,7 +64,7 @@
         </li> -->
       </ul>
     </div>
-    <div class="w-full absolute bottom-6 px-6">
+    <div class="w-full absolute left-0 right-0 bottom-6 px-6">
       <div
         class="flex items-center justify-center gap-6 bg-light_gray dark:bg-dark_gray h-[48px] rounded"
       >
@@ -134,3 +136,19 @@ watch(darkMode, (val) => {
   }
 });
 </script>
+
+<style scoped>
+.styled_scrollbar::-webkit-scrollbar {
+  width: 4px; /* width of the entire scrollbar */
+}
+
+.styled_scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* color of the tracking area */
+}
+
+.styled_scrollbar::-webkit-scrollbar-thumb {
+  background-color: #828fa3; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid transparent; /* creates padding around scroll thumb */
+}
+</style>
