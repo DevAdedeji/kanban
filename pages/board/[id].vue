@@ -21,7 +21,7 @@
 definePageMeta({
   layout: "default",
 });
-const { showCreateTaskModal } = useCreateTaskModal();
+const { showCreateTaskModal } = useModal();
 </script>
 
 <style scoped>

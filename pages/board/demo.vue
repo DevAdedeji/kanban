@@ -10,9 +10,19 @@
         :cards="dummyData[column.id]"
       />
     </div>
-    <CreateTask
+    <LazyCreateTask
       v-if="showCreateTaskModal"
       @close-modal="showCreateTaskModal = false"
+    />
+    <LazyEditBoard
+      v-if="showEditBoardModal"
+      @close-modal="showEditBoardModal = false"
+    />
+    <LazyCustomKDelete
+      v-if="showDeleteModal"
+      title="Delete Task?"
+      desc="Are you sure you want to delete the ‘Build settings UI’ task and its subtasks? This action cannot be reversed."
+      @close-modal="showDeleteModal = false"
     />
   </main>
 </template>
@@ -22,7 +32,7 @@ import { dummyData, columns } from "../../helper/data";
 definePageMeta({
   layout: "default",
 });
-const { showCreateTaskModal } = useCreateTaskModal();
+const { showCreateTaskModal, showEditBoardModal, showDeleteModal } = useModal();
 const { openBoard } = useBoard();
 onBeforeMount(() => {
   openBoard(dummyData.value);

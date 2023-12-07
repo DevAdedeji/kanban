@@ -1,7 +1,29 @@
 const showCreateTaskModal = ref<boolean>(false);
-export const useCreateTaskModal = () => {
+const showCreateBoardModal = ref<boolean>(false);
+const showEditBoardModal = ref<boolean>(false);
+const showDeleteModal = ref<boolean>(false);
+
+export const useModal = () => {
   const toggleCreateTaskModal = () => {
     showCreateTaskModal.value = !showCreateTaskModal.value;
   };
-  return { toggleCreateTaskModal, showCreateTaskModal };
+  const toggleCreateBoardModal = () => {
+    showCreateBoardModal.value = !showCreateBoardModal.value;
+  };
+  const toggleEditBoardModal = () => {
+    showEditBoardModal.value = !showEditBoardModal.value;
+  };
+  const toggleDeleteModal = () => {
+    showDeleteModal.value = !showDeleteModal.value;
+  };
+  return {
+    toggleCreateTaskModal,
+    showCreateTaskModal,
+    toggleCreateBoardModal,
+    showCreateBoardModal,
+    toggleEditBoardModal,
+    showEditBoardModal,
+    toggleDeleteModal,
+    showDeleteModal,
+  };
 };

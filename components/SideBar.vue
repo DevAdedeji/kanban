@@ -13,10 +13,10 @@
         All boards (1)
       </p>
       <ul
-        class="mt-5 flex flex-col gap-2 w-full styled_scrollbar overflow-y-auto min-h-[50vh] h-[50vh] max-h-[50vh]"
+        class="mt-5 flex flex-col gap-4 w-full styled_scrollbar overflow-y-auto min-h-[50vh] h-[50vh] max-h-[50vh]"
       >
         <li
-          class="px-6 min-h-[48px] flex items-center h-[48px] cursor-pointer"
+          class="px-6 min-h-[48px] flex items-center h-[48px] cursor-pointer dark:font-semibold tracking-wider"
           :class="
             route.path === '/board/demo'
               ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
@@ -31,13 +31,19 @@
           </nuxt-link>
         </li>
         <li
-          class="px-6 flex items-center gap-4 min-h-[48px] h-[48px] cursor-pointer text-blue hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px]"
+          class="px-6 flex items-center min-h-[48px] h-[48px] cursor-pointer text-blue hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] hover:dark:bg-light_black dark:font-semibold tracking-wider"
         >
-          <IconsBoardIcon :active="false" :button="true" />
-          <div class="flex items-center gap-1">
-            <IconsPlusIcon color="blue" />
-            <p>Create New Board</p>
-          </div>
+          <button
+            class="flex items-center gap-4 w-full"
+            aria-label="Create new board button"
+            @click="toggleCreateBoardModal"
+          >
+            <IconsBoardIcon :active="false" :button="true" />
+            <div class="flex items-center gap-1">
+              <IconsPlusIcon color="blue" />
+              <p>Create New Board</p>
+            </div>
+          </button>
         </li>
       </ul>
     </div>
@@ -90,6 +96,7 @@
 defineEmits(["close"]);
 const colorMode = useColorMode();
 const route = useRoute();
+const { toggleCreateBoardModal } = useModal();
 
 const isDark = computed({
   get() {

@@ -18,11 +18,22 @@
       <TopBar :show-sidebar="showSidebar" />
       <slot />
     </div>
+    <LazyCreateBoard
+      v-if="showCreateBoardModal"
+      @close-modal="showCreateBoardModal = false"
+    />
+    <LazyCustomKDelete
+      v-if="showDeleteModal"
+      title="Delete Board?"
+      desc="Are you sure you want to delete the ‘Platform Launch’ board? This action will remove all columns and tasks and cannot be reversed."
+      @close-modal="showDeleteModal = false"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
 const showSidebar = ref<boolean>(true);
+const { showCreateBoardModal, showDeleteModal } = useModal();
 </script>
 
 <style scoped>

@@ -31,13 +31,22 @@
     <div
       v-if="showBoardOptions"
       ref="boardOptions"
-      class="bg-white dark:bg-dark_gray absolute right-6 top-24 shadow p-4 rounded"
+      class="bg-white dark:bg-dark_gray absolute right-6 top-24 shadow-xl p-4 rounded"
     >
       <ul class="flex flex-col gap-2">
         <li>
-          <button class="text-medium_gray text-sm">Edit board</button>
+          <button
+            class="text-medium_gray text-sm"
+            @click="toggleEditBoardModal"
+          >
+            Edit board
+          </button>
         </li>
-        <li><button class="text-red text-sm">Delete board</button></li>
+        <li>
+          <button class="text-red text-sm" @click="toggleDeleteModal">
+            Delete board
+          </button>
+        </li>
       </ul>
     </div>
   </nav>
@@ -51,7 +60,8 @@ defineProps({
   },
 });
 const colorMode = useColorMode();
-const { toggleCreateTaskModal } = useCreateTaskModal();
+const { toggleCreateTaskModal, toggleEditBoardModal, toggleDeleteModal } =
+  useModal();
 const { activeBoard } = useBoard();
 
 const showBoardOptions = ref<boolean>(false);
