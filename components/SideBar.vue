@@ -50,7 +50,7 @@
           aria-label="Turn on light mode display"
           @click="toggleTheme('light')"
         >
-          <img src="/sun.png" class="w-[18px] h-[18px]" />
+          <img src="/sun.png" class="w-[18px] h-[18px]" alt="light mode icon" />
         </button>
         <UToggle
           v-model="darkMode"
@@ -62,7 +62,11 @@
           aria-label="Turn on dark mode display"
           @click="toggleTheme('dark')"
         >
-          <img src="/night.png" class="w-[18px] h-[18px]" />
+          <img
+            src="/night.png"
+            class="w-[18px] h-[18px]"
+            alt="dark mode icon"
+          />
         </button>
       </div>
       <button
@@ -71,7 +75,11 @@
         aria-label="Hide sidebar button"
         @click="$emit('close')"
       >
-        <img src="/eye-slash.png" class="w-[18px] h-[18px]" />
+        <img
+          src="/eye-slash.png"
+          class="w-[18px] h-[18px]"
+          alt="hide sidebar icon"
+        />
         <p class="text-medium_gray font-semibold">Hide Sidebar</p>
       </button>
     </div>

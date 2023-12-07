@@ -7,6 +7,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Kanban - Manage your tasks",
+      htmlAttrs: {
+        lang: "en",
+      },
     },
   },
   modules: ["@vueuse/nuxt", "@nuxt/ui"],

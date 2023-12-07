@@ -8,7 +8,7 @@
         aria-label="Show sidebar button"
         @click="showSidebar = true"
       >
-        <img src="/eye.png" class="w-[16px] h-[10px]" />
+        <img src="/eye.png" class="w-[16px] h-[10px]" alt="show sidebar icon" />
       </button>
     </div>
     <div
