@@ -18,25 +18,25 @@
         <li
           class="px-6 min-h-[48px] flex items-center h-[48px] cursor-pointer"
           :class="
-            active
-              ? 'bg-blue rounded-tr-[100px] rounded-br-[100px]'
-              : 'hover:text-blue'
+            route.path === '/board/demo'
+              ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
+              : 'hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] text-medium_gray hover:text-blue'
           "
         >
           <nuxt-link class="w-full flex items-center gap-4" to="/board/demo">
-            <IconsBoardIcon :active="active" />
-            <p :class="active ? 'text-white' : 'text-medium_gray'">
+            <IconsBoardIcon :active="route.path === '/board/demo'" />
+            <p>
               {{ "Demo Project" }}
             </p>
           </nuxt-link>
         </li>
         <li
-          class="px-6 flex items-center gap-4 min-h-[48px] h-[48px] cursor-pointer hover:text-blue"
+          class="px-6 flex items-center gap-4 min-h-[48px] h-[48px] cursor-pointer text-blue hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px]"
         >
           <IconsBoardIcon :active="false" :button="true" />
           <div class="flex items-center gap-1">
             <IconsPlusIcon color="blue" />
-            <p class="text-blue">Create New Board</p>
+            <p>Create New Board</p>
           </div>
         </li>
       </ul>
@@ -79,8 +79,9 @@
 </template>
 
 <script setup lang="ts">
-const colorMode = useColorMode();
 defineEmits(["close"]);
+const colorMode = useColorMode();
+const route = useRoute();
 
 const isDark = computed({
   get() {
@@ -95,7 +96,7 @@ const toggleTheme = (val: string) => {
   colorMode.preference = val;
 };
 
-const active = ref<boolean>(true);
+// const active = ref<boolean>(true);
 const darkMode = ref(false);
 onBeforeMount(() => {
   if (colorMode.preference === "dark") {
