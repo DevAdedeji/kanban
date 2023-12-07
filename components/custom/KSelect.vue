@@ -5,7 +5,7 @@
       :class="showOptions ? 'border-blue' : 'border-[#979797]'"
       @click="showOptions = !showOptions"
     >
-      <p>{{ selected.label }}</p>
+      <p class="text-sm">{{ selected.label }}</p>
       <IconsArrowDown />
     </div>
     <div
@@ -16,7 +16,7 @@
         <li
           v-for="(option, index) in options"
           :key="index"
-          class="p-2 border-b dark:border-none border-light_gray dark:border-[#979797] hover:bg-light_gray hover:dark:bg-dark_gray cursor-pointer"
+          class="p-2 border-b dark:border-none border-light_gray dark:border-[#979797] hover:bg-light_gray hover:dark:bg-dark_gray cursor-pointer text-sm"
           @click="selectOption(option)"
         >
           {{ option.label }}

@@ -1,11 +1,12 @@
 import { useStorage } from "@vueuse/core";
-import { BoardType } from "./type";
+import { type BoardType } from "./type";
 
 export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
   id: "1",
-  name: "Demo",
+  name: "Demo Project",
   todo: [
     {
+      id: "1",
       title: "Build UI for onboarding flow",
       description: "",
       status: "Todo",
@@ -25,6 +26,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "2",
       title: "Build UI for search",
       description: "",
       status: "Todo",
@@ -36,6 +38,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "3",
       title: "Build settings UI",
       description: "",
       status: "Todo",
@@ -51,6 +54,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "4",
       title: "QA and test all major user journeys",
       description:
         "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
@@ -70,6 +74,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
   inprogress: [],
   done: [
     {
+      id: "5",
       title: "Conduct 5 wireframe tests",
       description:
         "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
@@ -82,6 +87,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "6",
       title: "Create wireframe prototype",
       description:
         "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
@@ -94,6 +100,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "7",
       title: "Review results of usability tests and iterate",
       description:
         "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
@@ -114,6 +121,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "8",
       title:
         "Create paper prototypes and conduct 10 usability tests with potential customers",
       description: "",
@@ -130,6 +138,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "9",
       title: "Market discovery",
       description:
         "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
@@ -142,6 +151,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "10",
       title: "Competitor analysis",
       description: "",
       status: "Done",
@@ -157,6 +167,7 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
       ],
     },
     {
+      id: "11",
       title: "Research the market",
       description:
         "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
@@ -175,3 +186,10 @@ export const dummyData: Ref<BoardType> = useStorage("DemoKanbanBoard", {
   ],
   dump: [],
 });
+
+export const columns = [
+  { title: "To do", id: "todo" },
+  { title: "In progress", id: "inprogress" },
+  { title: "Done", id: "done" },
+  { title: "Dump", id: "dump" },
+];

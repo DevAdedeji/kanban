@@ -9,12 +9,7 @@ export default defineNuxtConfig({
       title: "Kanban - Manage your tasks",
     },
   },
-  modules: [
-    "@pinia/nuxt",
-    "@pinia-plugin-persistedstate/nuxt",
-    "@vueuse/nuxt",
-    "@nuxt/ui",
-  ],
+  modules: ["@vueuse/nuxt", "@nuxt/ui"],
   css: ["/assets/css/main.css"],
-  plugins: [],
+  plugins: ["@/plugins/draggable.ts"],
 });

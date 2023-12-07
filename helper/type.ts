@@ -1,9 +1,10 @@
-interface SubTask {
+export interface SubTask {
   title: string;
   isCompleted: boolean;
 }
 
-interface Task {
+export interface Task {
+  id: string;
   title: string;
   description: string;
   status: string;
@@ -17,4 +18,5 @@ export type BoardType = {
   inprogress: Task[];
   done: Task[];
   dump: Task[];
+  [key: string]: any;
 };

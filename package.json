@@ -24,13 +24,12 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.9.0",
-    "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
-    "@pinia/nuxt": "^0.5.1",
     "@typescript-eslint/parser": "^6.8.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vuedraggable": "^4.1.0"
   }
 }

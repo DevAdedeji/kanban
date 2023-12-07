@@ -7,22 +7,25 @@
         <img v-if="!isDark" src="/logo_light.png" alt="Kanban logo" />
         <img v-if="isDark" src="/logo_dark.png" alt="Kanban logo" />
       </div>
-      <h2 class="text-black dark:text-white text-2xl font-semibold">
-        {{ "Demo Project" }}
+      <h2
+        v-if="activeBoard"
+        class="text-black dark:text-white text-2xl font-semibold"
+      >
+        {{ activeBoard.name || "N/A" }}
       </h2>
     </div>
-    <div class="flex items-center gap-6">
+    <div v-if="activeBoard" class="flex items-center gap-6">
       <CustomKButton size="sm" type="primary" @click="toggleCreateTaskModal">
-        <img src="@/assets/icons/plus.svg" />
+        <IconsPlusIcon />
         <p class="text-white text-sm">Add New Task</p>
       </CustomKButton>
       <button
         class="cursor-pointer p-2"
         type="button"
         aria-label="Toggle board option"
-        @click="showBoardOptions = !showBoardOptions"
+        @click="toggleBoardOptions"
       >
-        <img src="@/assets/icons/dots-y.svg" />
+        <IconsDotY />
       </button>
     </div>
     <div
@@ -49,6 +52,7 @@ defineProps({
 });
 const colorMode = useColorMode();
 const { toggleCreateTaskModal } = useCreateTaskModal();
+const { activeBoard } = useBoard();
 
 const showBoardOptions = ref<boolean>(false);
 const boardOptions = ref<HTMLDivElement | null>(null);
@@ -65,4 +69,12 @@ const isDark = computed({
 onClickOutside(boardOptions, (_event) => {
   showBoardOptions.value = false;
 });
+
+const toggleBoardOptions = () => {
+  if (showBoardOptions.value) {
+    showBoardOptions.value = false;
+  } else {
+    showBoardOptions.value = true;
+  }
+};
 </script>

@@ -8,10 +8,13 @@
         aria-label="Show sidebar button"
         @click="showSidebar = true"
       >
-        <img src="/eye.png" />
+        <img src="/eye.png" class="w-[16px] h-[10px]" />
       </button>
     </div>
-    <div :class="showSidebar ? 'ml-[300px]' : ''" class="w-full">
+    <div
+      :class="showSidebar ? 'ml-[280px]' : ''"
+      class="w-full overflow-hidden"
+    >
       <TopBar :show-sidebar="showSidebar" />
       <slot />
     </div>
