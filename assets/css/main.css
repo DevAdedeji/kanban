@@ -70,3 +70,7 @@ html {
   border-radius: 20px; /* roundness of the scroll thumb */
   border: 3px solid transparent; /* creates padding around scroll thumb */
 }
+
+* {
+  -webkit-tap-highlight-color: transparent !important;
+}

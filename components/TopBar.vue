@@ -151,7 +151,6 @@
 </template>
 
 <script setup lang="ts">
-import { onClickOutside } from "@vueuse/core";
 defineProps({
   showSidebar: {
     type: Boolean,
@@ -169,7 +168,6 @@ const { activeBoard } = useBoard();
 
 const showBoardOptions = ref<boolean>(false);
 const showMobileMenu = ref<boolean>(false);
-const boardOptions = ref<HTMLDivElement | null>(null);
 const darkMode = ref(false);
 
 const isDark = computed({
@@ -181,9 +179,6 @@ const isDark = computed({
   },
 });
 
-onClickOutside(boardOptions, (_event) => {
-  showBoardOptions.value = false;
-});
 const toggleTheme = (val: string) => {
   colorMode.preference = val;
   if (colorMode.preference === "dark") {
