@@ -1,5 +1,6 @@
 <template>
   <nav
+    v-if="activeBoard"
     class="w-full bg-white dark:bg-dark_gray h-24 flex items-center justify-between px-6 sticky top-0"
   >
     <div class="flex items-center gap-6">
@@ -7,17 +8,35 @@
         <img v-if="!isDark" src="/logo_light.png" alt="Kanban logo" />
         <img v-if="isDark" src="/logo_dark.png" alt="Kanban logo" />
       </div>
-      <h2
-        v-if="activeBoard"
-        class="text-black dark:text-white text-2xl font-semibold"
-      >
-        {{ activeBoard.name || "N/A" }}
-      </h2>
+      <div class="flex items-center gap-2">
+        <img
+          src="/logo.png"
+          alt="Kanban logo"
+          class="w-[24px] h-[25px] sm:hidden"
+        />
+        <h2
+          class="text-black dark:text-white text-lg sm:text-2xl font-semibold"
+        >
+          {{ activeBoard.name || "N/A" }}
+        </h2>
+        <button
+          class="flex items-center justify-center sm:hidden"
+          aria-label="Toggle mobile menu"
+          @click="showMobileMenu = !showMobileMenu"
+        >
+          <img
+            src="/arrow.png"
+            alt="arrow"
+            class="w-[24px] h-[24px"
+            :class="showMobileMenu ? 'rotate-180 duration-100' : 'duration-100'"
+          />
+        </button>
+      </div>
     </div>
-    <div v-if="activeBoard" class="flex items-center gap-6">
+    <div class="flex items-center gap-6">
       <CustomKButton size="sm" type="primary" @click="toggleCreateTaskModal">
         <IconsPlusIcon />
-        <p class="text-white text-sm">Add New Task</p>
+        <p class="text-white text-sm hidden sm:block">Add New Task</p>
       </CustomKButton>
       <button
         class="cursor-pointer p-2"
@@ -49,6 +68,85 @@
         </li>
       </ul>
     </div>
+    <div
+      v-if="showMobileMenu"
+      class="absolute top-[100px] left-6 right-0 rounded bg-white dark:bg-dark_gray w-[264px] h-[322px] shadow-2xl sm:hidden"
+    >
+      <div class="pt-4">
+        <p
+          class="px-6 text-medium_gray text-xs uppercase tracking-[2.4px] font-bold"
+        >
+          All boards (1)
+        </p>
+        <ul
+          class="mt-5 flex flex-col gap-4 w-full styled_scrollbar overflow-y-auto min-h-[200px] h-[50px] max-h-[50px]"
+        >
+          <li
+            class="px-6 min-h-[48px] flex items-center h-[48px] cursor-pointer dark:font-semibold tracking-wider"
+            :class="
+              route.path === '/board/demo'
+                ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
+                : 'hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] text-medium_gray hover:text-blue'
+            "
+          >
+            <nuxt-link class="w-full flex items-center gap-4" to="/board/demo">
+              <IconsBoardIcon :active="route.path === '/board/demo'" />
+              <p>
+                {{ "Demo Project" }}
+              </p>
+            </nuxt-link>
+          </li>
+          <li
+            class="px-6 flex items-center min-h-[48px] h-[48px] cursor-pointer text-blue hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] hover:dark:bg-light_black dark:font-semibold tracking-wider"
+          >
+            <button
+              class="flex items-center gap-4 w-full"
+              aria-label="Create new board button"
+              @click="toggleCreateBoardModal"
+            >
+              <IconsBoardIcon :active="false" :button="true" />
+              <div class="flex items-center gap-1">
+                <IconsPlusIcon color="blue" />
+                <p>Create New Board</p>
+              </div>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="w-full absolute left-0 right-0 bottom-6 px-6">
+        <div
+          class="flex items-center justify-center gap-6 bg-light_gray dark:bg-dark_gray h-[48px] rounded"
+        >
+          <button
+            class="cursor-pointer"
+            aria-label="Turn on light mode display"
+            @click="toggleTheme('light')"
+          >
+            <img
+              src="/sun.png"
+              class="w-[18px] h-[18px]"
+              alt="light mode icon"
+            />
+          </button>
+          <UToggle
+            v-model="darkMode"
+            class="!bg-blue"
+            aria-label="Toggle display mode"
+          />
+          <button
+            class="cursor-pointer"
+            aria-label="Turn on dark mode display"
+            @click="toggleTheme('dark')"
+          >
+            <img
+              src="/night.png"
+              class="w-[18px] h-[18px]"
+              alt="dark mode icon"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
   </nav>
 </template>
 
@@ -60,12 +158,19 @@ defineProps({
   },
 });
 const colorMode = useColorMode();
-const { toggleCreateTaskModal, toggleEditBoardModal, toggleDeleteModal } =
-  useModal();
+const route = useRoute();
+const {
+  toggleCreateTaskModal,
+  toggleEditBoardModal,
+  toggleDeleteModal,
+  toggleCreateBoardModal,
+} = useModal();
 const { activeBoard } = useBoard();
 
 const showBoardOptions = ref<boolean>(false);
+const showMobileMenu = ref<boolean>(false);
 const boardOptions = ref<HTMLDivElement | null>(null);
+const darkMode = ref(false);
 
 const isDark = computed({
   get() {
@@ -79,7 +184,14 @@ const isDark = computed({
 onClickOutside(boardOptions, (_event) => {
   showBoardOptions.value = false;
 });
-
+const toggleTheme = (val: string) => {
+  colorMode.preference = val;
+  if (colorMode.preference === "dark") {
+    darkMode.value = true;
+  } else {
+    darkMode.value = false;
+  }
+};
 const toggleBoardOptions = () => {
   if (showBoardOptions.value) {
     showBoardOptions.value = false;
@@ -87,4 +199,18 @@ const toggleBoardOptions = () => {
     showBoardOptions.value = true;
   }
 };
+onBeforeMount(() => {
+  if (colorMode.preference === "dark") {
+    darkMode.value = true;
+  } else {
+    darkMode.value = false;
+  }
+});
+watch(darkMode, (val) => {
+  if (val) {
+    toggleTheme("dark");
+  } else {
+    toggleTheme("light");
+  }
+});
 </script>

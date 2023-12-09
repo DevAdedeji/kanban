@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fixed top-0 left-0 bottom-0 bg-white dark:bg-dark_gray h-screen w-[280px] overflow-y-hidden"
+    class="fixed top-0 left-0 bottom-0 bg-white dark:bg-dark_gray h-screen w-[250px] md:w-[280px] overflow-y-hidden"
   >
     <div class="px-6 h-24 flex items-center justify-center">
       <img v-if="!isDark" src="/logo_light.png" alt="Kanban logo" />
@@ -109,6 +109,11 @@ const isDark = computed({
 
 const toggleTheme = (val: string) => {
   colorMode.preference = val;
+  if (colorMode.preference === "dark") {
+    darkMode.value = true;
+  } else {
+    darkMode.value = false;
+  }
 };
 
 // const active = ref<boolean>(true);

@@ -1,7 +1,9 @@
 <template>
   <LazyCustomKModal :show="show" @close-modal="$emit('close-modal')">
     <template #content>
-      <div class="bg-white dark:bg-dark_gray w-[480px] p-6 rounded-md">
+      <div
+        class="bg-white dark:bg-dark_gray w-[90vw] sm:w-[480px] p-6 rounded-md"
+      >
         <p class="text-lg text-black dark:text-white font-semibold">
           Create New Board
         </p>

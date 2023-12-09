@@ -1,6 +1,8 @@
 <template>
   <main class="w-full p-6 overflow-hidden">
-    <div class="container overflow-auto min-h-[100vh] no_style_scrollbar gap-6">
+    <div
+      class="board-container overflow-auto min-h-[100vh] no_style_scrollbar gap-6"
+    >
       <!-- Columns -->
       <!-- <BoardColumn
         v-for="column in columns"
@@ -25,7 +27,7 @@ const { showCreateTaskModal } = useModal();
 </script>
 
 <style scoped>
-.container {
+.board-container {
   display: grid;
   grid-template-columns: repeat(4, 300px);
 }
@@ -36,5 +38,10 @@ const { showCreateTaskModal } = useModal();
 .no_style_scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+@media (max-width: 700px) {
+  .board-container {
+    grid-template-columns: repeat(4, 280px);
+  }
 }
 </style>

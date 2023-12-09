@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <!-- Title -->
     <div class="flex items-center gap-2">
       <div class="w-[15px] h-[15px] bg-[#49C4E5] rounded-[50%]"></div>

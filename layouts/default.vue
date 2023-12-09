@@ -1,6 +1,10 @@
 <template>
   <div class="flex w-full h-full bg-lighter_gray dark:bg-light_black relative">
-    <SideBar v-if="showSidebar" @close="showSidebar = false" />
+    <SideBar
+      v-if="showSidebar"
+      class="hidden sm:block"
+      @close="showSidebar = false"
+    />
     <div v-else class="fixed top-0 left-0 bottom-0">
       <button
         type="button"
@@ -12,7 +16,7 @@
       </button>
     </div>
     <div
-      :class="showSidebar ? 'ml-[280px]' : ''"
+      :class="showSidebar ? 'ml-0 sm:ml-[250px] md:ml-[280px]' : ''"
       class="w-full overflow-hidden"
     >
       <TopBar :show-sidebar="showSidebar" />
