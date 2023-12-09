@@ -26,9 +26,9 @@ const buttonStyle = computed(() => {
     style += "bg-red hover:bg-light_red";
   }
   if (props.size === "sm") {
-    style += " py-2 px-6 rounded-2xl";
+    style += " py-2 px-4 sm:px-6 rounded-2xl";
   } else if (props.size === "lg") {
-    style += " py-3 px-10 rounded-3xl";
+    style += " py-3 px-8 sm:px-10 rounded-3xl";
   }
   return style;
 });

@@ -2,7 +2,7 @@
   <LazyCustomKModal :show="show" @close-modal="$emit('close-modal')">
     <template #content>
       <div
-        class="bg-white dark:bg-dark_gray w-[480px] p-6 rounded-md flex flex-col gap-6"
+        class="bg-white dark:bg-dark_gray w-[90vw] sm:w-[480px] p-6 rounded-md flex flex-col gap-6"
       >
         <p class="text-lg text-red font-semibold">
           {{ title }}

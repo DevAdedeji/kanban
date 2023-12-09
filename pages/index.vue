@@ -6,6 +6,10 @@
 definePageMeta({
   layout: "default",
 });
+const router = useRouter();
+onBeforeMount(() => {
+  router.push("/board/demo");
+});
 </script>
 
 <style scoped>
