@@ -2,7 +2,7 @@
   <div
     class="flex items-center justify-center h-screen bg-white dark:bg-dark_gray"
   >
-    <div class="flex items-center gap-2">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-2">
       <div>
         <div class="lds-ring">
           <div></div>

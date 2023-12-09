@@ -12,15 +12,15 @@
         :cards="dummyData[column.id]"
       />
     </div>
-    <LazyCreateTask
+    <CreateTask
       v-if="showCreateTaskModal"
       @close-modal="showCreateTaskModal = false"
     />
-    <LazyEditBoard
+    <EditBoard
       v-if="showEditBoardModal"
       @close-modal="showEditBoardModal = false"
     />
-    <LazyCustomKDelete
+    <CustomKDelete
       v-if="showDeleteModal"
       title="Delete Task?"
       desc="Are you sure you want to delete the ‘Build settings UI’ task and its subtasks? This action cannot be reversed."

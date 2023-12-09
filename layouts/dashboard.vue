@@ -22,11 +22,11 @@
       <TopBar :show-sidebar="showSidebar" />
       <slot />
     </div>
-    <LazyCreateBoard
+    <CreateBoard
       v-if="showCreateBoardModal"
       @close-modal="showCreateBoardModal = false"
     />
-    <LazyCustomKDelete
+    <CustomKDelete
       v-if="showDeleteModal"
       title="Delete Board?"
       desc="Are you sure you want to delete the ‘Platform Launch’ board? This action will remove all columns and tasks and cannot be reversed."
