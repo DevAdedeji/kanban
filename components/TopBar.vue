@@ -97,6 +97,23 @@
             </nuxt-link>
           </li>
           <li
+            v-for="board in boards"
+            :key="board.id"
+            class="px-6 min-h-[48px] flex items-center h-[48px] cursor-pointer dark:font-semibold tracking-wider"
+            :class="
+              route.path === `/board/${board.id}`
+                ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
+                : 'hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] text-medium_gray hover:text-blue'
+            "
+          >
+            <nuxt-link class="w-full flex items-center gap-4" to="/board/demo">
+              <IconsBoardIcon :active="route.path === `/board/${board.id}`" />
+              <p>
+                {{ board.name }}
+              </p>
+            </nuxt-link>
+          </li>
+          <li
             class="px-6 flex items-center min-h-[48px] h-[48px] cursor-pointer text-blue hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] hover:dark:bg-light_black dark:font-semibold tracking-wider"
           >
             <button
@@ -164,7 +181,7 @@ const {
   toggleDeleteModal,
   toggleCreateBoardModal,
 } = useModal();
-const { activeBoard } = useBoard();
+const { activeBoard, boards } = useBoard();
 
 const showBoardOptions = ref<boolean>(false);
 const showMobileMenu = ref<boolean>(false);

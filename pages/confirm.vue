@@ -22,11 +22,11 @@
 definePageMeta({
   middleware: ["user"],
 });
+const { fetchBoards } = useBoard();
 const router = useRouter();
-onMounted(() => {
-  setTimeout(() => {
-    router.push("/board/demo");
-  }, 2000);
+onBeforeMount(async () => {
+  await fetchBoards();
+  router.push("/board/demo");
 });
 </script>
 
