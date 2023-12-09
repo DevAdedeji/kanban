@@ -3,8 +3,10 @@
     class="fixed top-0 left-0 bottom-0 bg-white dark:bg-dark_gray h-screen w-[250px] md:w-[280px] overflow-y-hidden"
   >
     <div class="px-6 h-24 flex items-center justify-center">
-      <img v-if="!isDark" src="/logo_light.png" alt="Kanban logo" />
-      <img v-if="isDark" src="/logo_dark.png" alt="Kanban logo" />
+      <ClientOnly>
+        <img v-if="!isDark" src="/logo_light.png" alt="Kanban logo" />
+        <img v-if="isDark" src="/logo_dark.png" alt="Kanban logo" />
+      </ClientOnly>
     </div>
     <div class="pt-14">
       <p

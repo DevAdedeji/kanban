@@ -21,7 +21,8 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: "default",
+  layout: "dashboard",
+  middleware: ["user"],
 });
 const { showCreateTaskModal } = useModal();
 </script>

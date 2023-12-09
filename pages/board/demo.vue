@@ -32,7 +32,8 @@
 <script lang="ts" setup>
 import { dummyData, columns } from "../../helper/data";
 definePageMeta({
-  layout: "default",
+  layout: "dashboard",
+  middleware: ["user"],
 });
 const { showCreateTaskModal, showEditBoardModal, showDeleteModal } = useModal();
 const { openBoard } = useBoard();
