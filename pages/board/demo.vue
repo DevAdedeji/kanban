@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { dummyData, columns } from "../../helper/data";
+import { dummyData, columns } from "~/helper/data";
 definePageMeta({
   layout: "dashboard",
   middleware: ["user"],

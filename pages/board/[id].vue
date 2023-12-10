@@ -1,16 +1,17 @@
 <template>
   <main class="w-full p-6 overflow-hidden">
     <div
+      v-if="activeBoard"
       class="board-container overflow-auto min-h-[100vh] no_style_scrollbar gap-6"
     >
       <!-- Columns -->
-      <!-- <BoardColumn
+      <BoardColumn
         v-for="column in columns"
         :key="column.id"
         class="flex flex-col gap-4"
         :title="column.title"
-        :cards="dummyData[column.id]"
-      /> -->
+        :cards="activeBoard[column.id]"
+      />
     </div>
     <CreateTask
       v-if="showCreateTaskModal"
@@ -20,11 +21,22 @@
 </template>
 
 <script lang="ts" setup>
+import { columns } from "~/helper/data";
 definePageMeta({
   layout: "dashboard",
   middleware: ["user"],
 });
 const { showCreateTaskModal } = useModal();
+const { boards, activeBoard } = useBoard();
+const route = useRoute();
+
+onBeforeMount(() => {
+  const id = route.params.id;
+  const board = boards.value.find((board) => Number(board.id) === Number(id));
+  if (board) {
+    activeBoard.value = board;
+  }
+});
 </script>
 
 <style scoped>
