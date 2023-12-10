@@ -29,16 +29,32 @@ definePageMeta({
 const { showCreateTaskModal } = useModal();
 const { boards, activeBoard } = useBoard();
 const route = useRoute();
+const router = useRouter();
+const toast = useToast();
+
+watch(boards, () => {
+  getActiveBoard();
+});
 
 onBeforeMount(() => {
+  getActiveBoard();
+});
+
+const getActiveBoard = () => {
   const id = route.params.id;
   if (boards.value) {
     const board = boards.value.find((board) => Number(board.id) === Number(id));
     if (board) {
       activeBoard.value = board;
+    } else {
+      toast.add({
+        title: "Couldn't find board, redirecting...",
+        icon: "i-heroicons-x-circle",
+      });
+      router.push("/board/demo");
     }
   }
-});
+};
 </script>
 
 <style scoped>
