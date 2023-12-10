@@ -82,14 +82,17 @@
           class="mt-5 flex flex-col gap-4 w-full styled_scrollbar overflow-y-auto min-h-[150px] h-[150px] max-h-[150px]"
         >
           <li
-            class="px-6 min-h-[40px] flex items-center h-[40px] cursor-pointer dark:font-semibold tracking-wider"
+            class="px-6 min-h-[40px] flex items-center h-[40px] cursor-pointer dark:font-semibold tracking-wider hover:dark:bg-light_black"
             :class="
               route.path === '/board/demo'
                 ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
                 : 'hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] text-medium_gray hover:text-blue'
             "
           >
-            <nuxt-link class="w-full flex items-center gap-4" to="/board/demo">
+            <nuxt-link
+              class="w-full h-full flex items-center gap-4"
+              to="/board/demo"
+            >
               <IconsBoardIcon :active="route.path === '/board/demo'" />
               <p>
                 {{ "Demo Project" }}
@@ -107,7 +110,7 @@
             "
           >
             <nuxt-link
-              class="w-full flex items-center gap-4"
+              class="w-full flex h-full items-center gap-4"
               :to="`/board/${board.id}`"
             >
               <IconsBoardIcon :active="route.path === `/board/${board.id}`" />
