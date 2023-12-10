@@ -18,7 +18,7 @@
               class="text-black dark:text-white"
             />
           </div>
-          <CustomKButton type="primary" size="lg" class="w-full">
+          <CustomKButton variant="primary" size="lg" class="w-full">
             <p class="text-white text-sm">Save Changes</p>
           </CustomKButton>
         </form>

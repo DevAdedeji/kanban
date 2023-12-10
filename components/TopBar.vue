@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="flex items-center gap-6">
-      <CustomKButton size="sm" type="primary" @click="toggleCreateTaskModal">
+      <CustomKButton size="sm" variant="primary" @click="toggleCreateTaskModal">
         <IconsPlusIcon />
         <p class="text-white text-sm hidden sm:block">Add New Task</p>
       </CustomKButton>
@@ -99,14 +99,17 @@
           <li
             v-for="board in boards"
             :key="board.id"
-            class="px-6 min-h-[40px] flex items-center h-[40px] cursor-pointer dark:font-semibold tracking-wider"
+            class="px-6 min-h-[40px] flex items-center h-[40px] cursor-pointer dark:font-semibold tracking-wider hover:dark:bg-light_black"
             :class="
               route.path === `/board/${board.id}`
                 ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
                 : 'hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] text-medium_gray hover:text-blue'
             "
           >
-            <nuxt-link class="w-full flex items-center gap-4" to="/board/demo">
+            <nuxt-link
+              class="w-full flex items-center gap-4"
+              :to="`/board/${board.id}`"
+            >
               <IconsBoardIcon :active="route.path === `/board/${board.id}`" />
               <p>
                 {{ board.name }}

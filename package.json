@@ -25,12 +25,16 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.9.0",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/parser": "^6.8.0",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2",
+    "uuid": "^9.0.1",
     "vuedraggable": "^4.1.0"
   }
 }

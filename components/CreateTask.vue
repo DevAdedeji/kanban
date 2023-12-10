@@ -35,7 +35,7 @@ recharge the batteries a little."
             <label for="status">Status</label>
             <CustomKSelect :options="statusOptions" />
           </div>
-          <CustomKButton type="primary" size="lg" class="w-full">
+          <CustomKButton variant="primary" size="lg" class="w-full">
             <p class="text-white text-sm">Create Task</p>
           </CustomKButton>
         </form>

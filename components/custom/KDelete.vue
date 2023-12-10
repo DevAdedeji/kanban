@@ -11,10 +11,10 @@
           {{ desc }}
         </p>
         <div class="grid grid-cols-2 gap-4 w-full">
-          <CustomKButton type="danger" size="lg" class="w-full">
+          <CustomKButton variant="danger" size="lg" class="w-full">
             <p class="text-white text-sm font-semibold tracking-wide">Delete</p>
           </CustomKButton>
-          <CustomKButton type="secondary" size="lg" class="w-full">
+          <CustomKButton variant="secondary" size="lg" class="w-full">
             <p class="text-blue text-sm font-semibold tracking-wide">Cancel</p>
           </CustomKButton>
         </div>
