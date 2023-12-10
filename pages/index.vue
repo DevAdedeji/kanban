@@ -9,7 +9,7 @@
       <button
         type="button"
         class="flex items-center justify-center gap-4 border border-[#979797] py-2 px-6"
-        @click="loginWithGoogle"
+        @click="login"
       >
         <svg
           id="google"
@@ -59,7 +59,7 @@ definePageMeta({
   middleware: ["user"],
 });
 const colorMode = useColorMode();
-const supabaseClient = useSupabaseClient();
+const { login } = useAuth();
 const isDark = computed({
   get() {
     return colorMode.value === "dark";
@@ -68,14 +68,6 @@ const isDark = computed({
     colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
   },
 });
-const loginWithGoogle = async () => {
-  const config = useRuntimeConfig();
-  const baseUrl = config.public.frontendBaseUrl;
-  await supabaseClient.auth.signInWithOAuth({
-    provider: "google",
-    options: { redirectTo: `${baseUrl}/confirm` },
-  });
-};
 </script>
 
 <style scoped>

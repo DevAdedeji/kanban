@@ -8,7 +8,7 @@
         <img v-if="isDark" src="/logo_dark.png" alt="Kanban logo" />
       </ClientOnly>
     </div>
-    <div class="pt-14">
+    <div class="pt-4">
       <p
         class="px-6 text-medium_gray text-xs uppercase tracking-[2.4px] font-bold"
       >
@@ -67,8 +67,29 @@
       </ul>
     </div>
     <div class="w-full absolute left-0 right-0 bottom-6 px-6">
+      <button
+        class="flex items-center justify-center gap-4 h-[48px] bg-light_gray dark:bg-light_black rounded mb-2 w-full"
+        aria-label="Log out button"
+        @click="logOut"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          :style="`fill: ${
+            isDark ? '#ffffff' : '#000000'
+          }; transform:; msfilter:`"
+        >
+          <path d="m2 12 5 4v-3h9v-2H7V8z"></path>
+          <path
+            d="M13.001 2.999a8.938 8.938 0 0 0-6.364 2.637L8.051 7.05c1.322-1.322 3.08-2.051 4.95-2.051s3.628.729 4.95 2.051 2.051 3.08 2.051 4.95-.729 3.628-2.051 4.95-3.08 2.051-4.95 2.051-3.628-.729-4.95-2.051l-1.414 1.414c1.699 1.7 3.959 2.637 6.364 2.637s4.665-.937 6.364-2.637c1.7-1.699 2.637-3.959 2.637-6.364s-.937-4.665-2.637-6.364a8.938 8.938 0 0 0-6.364-2.637z"
+          ></path>
+        </svg>
+        <p class="text-black dark:text-white hover:text-blue">Log out</p>
+      </button>
       <div
-        class="flex items-center justify-center gap-6 bg-light_gray dark:bg-dark_gray h-[48px] rounded"
+        class="flex items-center justify-center gap-6 bg-light_gray dark:bg-light_black h-[48px] rounded"
       >
         <button
           class="cursor-pointer"
@@ -117,6 +138,7 @@ const colorMode = useColorMode();
 const route = useRoute();
 const { toggleCreateBoardModal } = useModal();
 const { boards } = useBoard();
+const { logOut } = useAuth();
 
 const isDark = computed({
   get() {
