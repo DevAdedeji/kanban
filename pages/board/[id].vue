@@ -32,9 +32,11 @@ const route = useRoute();
 
 onBeforeMount(() => {
   const id = route.params.id;
-  const board = boards.value.find((board) => Number(board.id) === Number(id));
-  if (board) {
-    activeBoard.value = board;
+  if (boards.value) {
+    const board = boards.value.find((board) => Number(board.id) === Number(id));
+    if (board) {
+      activeBoard.value = board;
+    }
   }
 });
 </script>
