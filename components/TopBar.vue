@@ -20,15 +20,14 @@
           {{ activeBoard.name || "N/A" }}
         </h2>
         <button
-          class="flex items-center justify-center sm:hidden"
+          class="flex items-center justify-center sm:hidden dropdown_toggler"
           aria-label="Toggle mobile menu"
           @click="showMobileMenu = !showMobileMenu"
         >
           <img
             src="/arrow.png"
             alt="arrow"
-            class="w-[24px] h-[24px"
-            :class="showMobileMenu ? 'rotate-180 duration-100' : 'duration-100'"
+            class="w-[24px] h-[24px dropdown_toggler"
           />
         </button>
       </div>
@@ -39,7 +38,7 @@
         <p class="text-white text-sm hidden sm:block">Add New Task</p>
       </CustomKButton>
       <button
-        class="cursor-pointer p-2"
+        class="cursor-pointer p-2 dropdown_toggler"
         type="button"
         aria-label="Toggle board option"
         @click="toggleBoardOptions"
@@ -47,12 +46,10 @@
         <IconsDotY />
       </button>
     </div>
-    <div
-      v-if="showBoardOptions"
-      ref="boardOptions"
-      class="bg-white dark:bg-dark_gray absolute right-6 top-24 shadow-xl p-4 rounded"
-    >
-      <ul class="flex flex-col gap-2">
+    <div v-if="showBoardOptions" class="absolute right-6 top-24">
+      <ul
+        class="bg-white dark:bg-dark_gray shadow-xl p-4 rounded flex flex-col gap-2 z-50"
+      >
         <li>
           <button
             class="text-medium_gray text-sm"
@@ -70,7 +67,7 @@
     </div>
     <div
       v-if="showMobileMenu"
-      class="absolute top-[100px] left-6 right-0 rounded bg-white dark:bg-dark_gray w-[264px] h-[322px] shadow-2xl sm:hidden"
+      class="absolute top-[100px] left-6 right-0 rounded bg-white dark:bg-dark_gray w-[264px] h-[322px] shadow-2xl sm:hidden mobile_menu"
     >
       <div class="pt-4">
         <p
@@ -88,6 +85,7 @@
                 ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
                 : 'hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] text-medium_gray hover:text-blue'
             "
+            @click="showMobileMenu = false"
           >
             <nuxt-link
               class="w-full h-full flex items-center gap-4"
@@ -108,6 +106,7 @@
                 ? 'bg-blue rounded-tr-[100px] rounded-br-[100px] text-white'
                 : 'hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] text-medium_gray hover:text-blue'
             "
+            @click="showMobileMenu = false"
           >
             <nuxt-link
               class="w-full flex h-full items-center gap-4"
@@ -121,9 +120,10 @@
           </li>
           <li
             class="px-6 flex items-center min-h-[40px] h-[40px] cursor-pointer text-blue hover:bg-[#EFEFF9] rounded-tr-[100px] rounded-br-[100px] hover:dark:bg-light_black dark:font-semibold tracking-wider"
+            @click="showMobileMenu = false"
           >
             <button
-              class="flex items-center gap-4 w-full"
+              class="flex items-center gap-4 w-full h-full"
               aria-label="Create new board button"
               @click="toggleCreateBoardModal"
             >
@@ -232,6 +232,7 @@ const toggleTheme = (val: string) => {
     darkMode.value = false;
   }
 };
+
 const toggleBoardOptions = () => {
   if (showBoardOptions.value) {
     showBoardOptions.value = false;
@@ -239,6 +240,15 @@ const toggleBoardOptions = () => {
     showBoardOptions.value = true;
   }
 };
+
+watch(darkMode, (val) => {
+  if (val) {
+    toggleTheme("dark");
+  } else {
+    toggleTheme("light");
+  }
+});
+
 onBeforeMount(() => {
   if (colorMode.preference === "dark") {
     darkMode.value = true;
@@ -246,11 +256,28 @@ onBeforeMount(() => {
     darkMode.value = false;
   }
 });
-watch(darkMode, (val) => {
-  if (val) {
-    toggleTheme("dark");
-  } else {
-    toggleTheme("light");
+
+const handleOnClickOutside = (event: MouseEvent) => {
+  const classList = (event.target as HTMLElement).classList;
+  if (!classList.contains("dropdown_toggler")) {
+    const classListArray = Array.from(classList);
+    if (classListArray && classListArray.length > 0) {
+      const hasDropdownClass = classListArray.some((classItem) =>
+        classItem.includes("dropdown"),
+      );
+      if (!hasDropdownClass) {
+        showBoardOptions.value = false;
+        showMobileMenu.value = false;
+      }
+    }
   }
+};
+
+onMounted(() => {
+  window.addEventListener("click", handleOnClickOutside);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("click", handleOnClickOutside);
 });
 </script>

@@ -13,9 +13,21 @@
         :cards="activeBoard[column.id]"
       />
     </div>
+    <EditBoard
+      v-if="showEditBoardModal"
+      @close-modal="showEditBoardModal = false"
+    />
     <CreateTask
       v-if="showCreateTaskModal"
       @close-modal="showCreateTaskModal = false"
+    />
+    <CustomKDelete
+      v-if="showDeleteModal && activeBoard"
+      :is-loading="deleting"
+      title="Delete Modal?"
+      :desc="`Are you sure you want to delete the ‘${activeBoard.name}’ and its tasks? This action cannot be reversed`"
+      @close-modal="showDeleteModal = false"
+      @delete="deleteBoard"
     />
   </main>
 </template>
@@ -26,9 +38,11 @@ definePageMeta({
   layout: "dashboard",
   middleware: ["user"],
 });
-const { showCreateTaskModal } = useModal();
+const { showCreateTaskModal, showEditBoardModal, showDeleteModal } = useModal();
 const { boards, activeBoard } = useBoard();
+const { deleteBoard, deleting } = useDeleteBoard();
 const route = useRoute();
+const router = useRouter();
 const toast = useToast();
 
 watch(boards, () => {
@@ -42,6 +56,7 @@ watch(boards, () => {
         title: "Board not found",
         icon: "i-heroicons-x-circle",
       });
+      router.push("/board/demo");
     }
   }
 });

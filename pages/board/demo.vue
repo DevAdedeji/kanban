@@ -22,8 +22,8 @@
     />
     <CustomKDelete
       v-if="showDeleteModal"
-      title="Delete Task?"
-      desc="Are you sure you want to delete the ‘Build settings UI’ task and its subtasks? This action cannot be reversed."
+      title="Delete Modal?"
+      desc="Are you sure you want to delete the ‘Demo’ project and its tasks? This action cannot be reversed."
       @close-modal="showDeleteModal = false"
     />
   </main>

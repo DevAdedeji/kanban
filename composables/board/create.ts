@@ -2,9 +2,10 @@ export const useCreateBoard = () => {
   const toast = useToast();
   const client = useSupabaseClient();
   const user = useSupabaseUser();
-  const { boards } = useBoard();
+  const { boards, activeBoard } = useBoard();
   const { toggleCreateBoardModal } = useModal();
   const creating = ref<boolean>(false);
+  const router = useRouter();
 
   const form = reactive({
     name: "",
@@ -23,7 +24,9 @@ export const useCreateBoard = () => {
         icon: "i-heroicons-check-circle",
       });
       boards.value.push(data[0]);
+      activeBoard.value = data[0];
       toggleCreateBoardModal();
+      router.push(`/board/${activeBoard.value.id}`);
     }
     if (error) {
       toast.add({

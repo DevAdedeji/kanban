@@ -11,10 +11,21 @@
           {{ desc }}
         </p>
         <div class="grid grid-cols-2 gap-4 w-full">
-          <CustomKButton variant="danger" size="lg" class="w-full">
+          <CustomKButton
+            variant="danger"
+            size="lg"
+            class="w-full"
+            :is-loading="isLoading"
+            @click="$emit('delete')"
+          >
             <p class="text-white text-sm font-semibold tracking-wide">Delete</p>
           </CustomKButton>
-          <CustomKButton variant="secondary" size="lg" class="w-full">
+          <CustomKButton
+            variant="secondary"
+            size="lg"
+            class="w-full"
+            @click="$emit('close-modal')"
+          >
             <p class="text-blue text-sm font-semibold tracking-wide">Cancel</p>
           </CustomKButton>
         </div>
@@ -24,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-defineEmits(["close-modal"]);
+defineEmits(["close-modal", "delete"]);
 const show = ref<boolean>(true);
 defineProps({
   title: {
@@ -36,6 +47,10 @@ defineProps({
     type: String,
     required: true,
     default: "",
+  },
+  isLoading: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>

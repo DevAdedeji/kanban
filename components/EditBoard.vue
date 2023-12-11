@@ -7,18 +7,28 @@
         <p class="text-lg text-black dark:text-white font-semibold">
           Edit Board
         </p>
-        <form class="py-6 flex flex-col gap-6">
+        <form class="py-6 flex flex-col gap-6" @submit.prevent="submitForm">
           <div class="form-box">
             <label for="name">Name</label>
             <input
               id="name"
+              v-model="form.name"
               type="text"
               name="name"
               placeholder="e.g Web Design"
               class="text-black dark:text-white"
+              :class="{ '!border-red !border': $v.name.$error }"
             />
+            <span v-if="$v.name.$error" class="text-xs text-red">
+              Name is required
+            </span>
           </div>
-          <CustomKButton variant="primary" size="lg" class="w-full">
+          <CustomKButton
+            :is-loading="updating"
+            variant="primary"
+            size="lg"
+            class="w-full"
+          >
             <p class="text-white text-sm">Save Changes</p>
           </CustomKButton>
         </form>
@@ -28,6 +38,27 @@
 </template>
 
 <script setup lang="ts">
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+
 defineEmits(["close-modal"]);
+const { form, updating, editBoard } = useEditBoard();
+
 const show = ref<boolean>(true);
+
+const rules = computed(() => {
+  return {
+    name: { required },
+    user_id: { required },
+  };
+});
+
+const $v = useVuelidate(rules, form);
+
+const submitForm = async () => {
+  const isFormCorrect = await $v.value.$validate();
+  if (isFormCorrect) {
+    editBoard();
+  }
+};
 </script>
