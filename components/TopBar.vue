@@ -1,7 +1,7 @@
 <template>
   <nav
     v-if="activeBoard"
-    class="w-full bg-white dark:bg-dark_gray h-24 flex items-center justify-between px-6 sticky top-0"
+    class="w-full bg-white dark:bg-dark_gray h-24 flex items-center justify-between px-6 sticky top-0 max-w-[1500px]"
   >
     <div class="flex items-center gap-6">
       <div v-if="!showSidebar" class="p-6">
