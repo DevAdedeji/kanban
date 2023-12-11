@@ -13,12 +13,16 @@ export default defineNuxtConfig({
       },
       meta: [
         { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1" },
+        {
+          name: "viewport",
+          content:
+            "width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1",
+        },
         {
           hid: "description",
           name: "description",
           content: "Kanban: Manage your tasks.",
-        },s
+        },
         { name: "format-detection", content: "telephone=no" },
         {
           hid: "og:title",
