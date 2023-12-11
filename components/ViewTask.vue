@@ -16,21 +16,23 @@
           </button>
           <div
             v-if="showBoardOptions"
-            class="absolute right-4 top-10 shadow-2xl z-50"
+            class="absolute right-4 top-10 shadow-2xl z-50 my_shadow"
           >
             <ul
               class="bg-white dark:bg-dark_gray shadow-xl p-4 rounded flex flex-col gap-2"
             >
               <li>
                 <button
-                  class="text-medium_gray text-sm"
+                  class="text-medium_gray text-base md:text-sm"
                   @click="toggleEditTaskModal"
                 >
                   Edit Task
                 </button>
               </li>
               <li @click="$emit('delete-task')">
-                <button class="text-red text-sm">Delete Task</button>
+                <button class="text-red text-base md:text-sm">
+                  Delete Task
+                </button>
               </li>
             </ul>
           </div>

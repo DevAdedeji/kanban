@@ -27,7 +27,8 @@
           <img
             src="/arrow.png"
             alt="arrow"
-            class="w-[24px] h-[24px dropdown_toggler"
+            class="w-[24px] h-[24px dropdown_toggler duration-100"
+            :class="showMobileMenu ? 'rotate-180' : ''"
           />
         </button>
       </div>
@@ -46,20 +47,23 @@
         <IconsDotY />
       </button>
     </div>
-    <div v-if="showBoardOptions" class="absolute right-6 top-24">
+    <div v-if="showBoardOptions" class="absolute right-6 top-24 my_shadow">
       <ul
         class="bg-white dark:bg-dark_gray shadow-xl p-4 rounded flex flex-col gap-2 z-50"
       >
         <li>
           <button
-            class="text-medium_gray text-sm"
+            class="text-medium_gray text-base md:text-sm"
             @click="toggleEditBoardModal"
           >
             Edit board
           </button>
         </li>
         <li>
-          <button class="text-red text-sm" @click="toggleDeleteModal">
+          <button
+            class="text-red text-base md:text-sm"
+            @click="toggleDeleteModal"
+          >
             Delete board
           </button>
         </li>
@@ -67,7 +71,7 @@
     </div>
     <div
       v-if="showMobileMenu"
-      class="absolute top-[100px] left-6 right-0 rounded bg-white dark:bg-dark_gray w-[264px] h-[322px] shadow-2xl sm:hidden mobile_menu z-50"
+      class="absolute top-[100px] left-6 right-0 rounded bg-white dark:bg-dark_gray w-[264px] h-[322px] my_shadow sm:hidden mobile_menu"
     >
       <div class="pt-4">
         <p

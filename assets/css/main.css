@@ -74,3 +74,7 @@ html {
 * {
   -webkit-tap-highlight-color: transparent !important;
 }
+
+.my_shadow{
+  box-shadow: 0rem 1rem 2rem rgba(54, 78, 126, 0.25) !important;
+}
