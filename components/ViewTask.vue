@@ -1,5 +1,5 @@
 <template>
-  <LazyCustomKModal :show="show" @close-modal="$emit('close-modal')">
+  <CustomKModal :show="show" @close-modal="$emit('close-modal')">
     <template #content>
       <div
         class="bg-white dark:bg-dark_gray w-[90vw] sm:w-[480px] p-6 rounded-md flex flex-col gap-4"
@@ -50,7 +50,7 @@
         </div>
       </div>
     </template>
-  </LazyCustomKModal>
+  </CustomKModal>
 </template>
 
 <script setup lang="ts">
@@ -113,7 +113,6 @@ const statusSelected = (val: Option) => {
 };
 
 onBeforeMount(() => {
-    console.log(props.task);
   const currentStatus = statusOptions.value.find(
     (status: Option) => status.value === props.task.status,
   );

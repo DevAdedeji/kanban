@@ -1,6 +1,6 @@
 <template>
   <main class="w-full p-6 overflow-hidden">
-    <p class="text-red text-sm pb-6">
+    <p class="text-red text-sm pb-6 font-semibold tracking-wider">
       Note: Only drag and drop functionality is available for demo, create a new
       board to be able to use all functionalities
     </p>
