@@ -40,7 +40,7 @@
         @close-modal="showDeleteModal = false"
       />
     </div>
-    <UNotifications />
+    <UNotifications :timeout="30000" color="primary" />
   </div>
 </template>
 
