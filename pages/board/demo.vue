@@ -1,7 +1,11 @@
 <template>
   <main class="w-full p-6 overflow-hidden">
+    <p class="text-red text-sm pb-6">
+      Note: Only drag and drop functionality is available for demo, create a new
+      board to be able to use all functionalities
+    </p>
     <div
-      class="board-container overflow-x-auto min-h-[100vh] no_style_scrollbar gap-6"
+      class="board-container overflow-x-auto min-h-screen no_style_scrollbar gap-6"
     >
       <!-- Columns -->
       <BoardColumn
