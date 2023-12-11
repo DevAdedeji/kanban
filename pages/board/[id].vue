@@ -67,6 +67,7 @@ watch(boards, () => {
     const board = boards.value.find((board) => Number(board.id) === Number(id));
     if (board) {
       activeBoard.value = board;
+      console.log(activeBoard.value);
     } else {
       toast.add({
         title: "Board not found",

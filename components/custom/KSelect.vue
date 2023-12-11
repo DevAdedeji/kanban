@@ -2,10 +2,15 @@
   <div ref="target" class="relative">
     <div
       class="h-10 rounded border p-2 cursor-pointer flex items-center justify-between"
-      :class="showOptions ? 'border-blue' : 'border-[#979797]'"
+      :class="[
+        showOptions ? 'border-blue' : 'border-[#979797]',
+        error ? '!border-red !border' : '',
+      ]"
       @click="showOptions = !showOptions"
     >
-      <p class="text-sm">{{ selected.label }}</p>
+      <p class="text-sm">
+        {{ selected ? selected.label : "Select an option" }}
+      </p>
       <IconsArrowDown />
     </div>
     <div
@@ -34,6 +39,7 @@ interface Option {
 }
 interface SelectProps {
   options: Option[];
+  error: Boolean;
 }
 
 const props = defineProps<SelectProps>();
@@ -41,7 +47,7 @@ const emits = defineEmits(["select"]);
 
 watch(props, () => {});
 
-const selected = ref<Option>(props.options[0]);
+const selected = ref<Option | null>(null);
 const showOptions = ref<boolean>(false);
 const target = ref<HTMLDivElement | null>(null);
 
