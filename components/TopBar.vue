@@ -67,7 +67,7 @@
     </div>
     <div
       v-if="showMobileMenu"
-      class="absolute top-[100px] left-6 right-0 rounded bg-white dark:bg-dark_gray w-[264px] h-[322px] shadow-2xl sm:hidden mobile_menu"
+      class="absolute top-[100px] left-6 right-0 rounded bg-white dark:bg-dark_gray w-[264px] h-[322px] shadow-2xl sm:hidden mobile_menu z-50"
     >
       <div class="pt-4">
         <p
