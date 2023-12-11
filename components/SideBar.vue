@@ -12,7 +12,7 @@
       <p
         class="px-6 text-medium_gray text-xs uppercase tracking-[2.4px] font-bold"
       >
-        All boards (1)
+        All boards ({{ boards.length + 1 }})
       </p>
       <ul
         class="mt-5 flex flex-col gap-4 w-full styled_scrollbar overflow-y-auto min-h-[50vh] h-[50vh] max-h-[50vh]"
