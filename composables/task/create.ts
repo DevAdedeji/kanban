@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const useCreateTask = () => {
   const { activeBoard } = useBoard();
   const { toggleCreateTaskModal } = useModal();
@@ -7,6 +9,7 @@ export const useCreateTask = () => {
   const creating = ref<boolean>(false);
 
   const form = reactive({
+    id: uuidv4(),
     title: "",
     description: "",
     status: "",
