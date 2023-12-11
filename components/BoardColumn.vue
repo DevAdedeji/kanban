@@ -49,7 +49,6 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps } from "vue";
 import { type Task } from "~/helper/type";
 const props = defineProps({
   cards: {
