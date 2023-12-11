@@ -2,7 +2,10 @@
   <div class="w-full">
     <!-- Title -->
     <div class="flex items-center gap-2">
-      <div class="w-[15px] h-[15px] bg-[#49C4E5] rounded-[50%]"></div>
+      <div
+        class="w-[15px] h-[15px] rounded-[50%]"
+        :class="columnBulletStyle"
+      ></div>
       <p class="uppercase text-sm text-medium_gray tracking-widest">
         {{ title }} ({{ cards.length }})
       </p>
@@ -46,8 +49,9 @@
 </template>
 
 <script setup lang="ts">
+import { mergeProps } from "vue";
 import { type Task } from "~/helper/type";
-defineProps({
+const props = defineProps({
   cards: {
     default: () => [],
     type: Array,
@@ -63,6 +67,18 @@ const { deleteTask, deleting } = useDeleteTask();
 const { showDeleteModal, showViewTaskModal, showEditTaskModal } = useModal();
 
 const currentTask = ref<Task | null>(null);
+
+const columnBulletStyle = computed(() => {
+  if (props.title === "To do") {
+    return "bg-[#49C4E5]";
+  } else if (props.title === "Dump") {
+    return "bg-[#000000]";
+  } else if (props.title === "Done") {
+    return "bg-[#67E2AE]";
+  } else {
+    return "bg-[#8471F2]";
+  }
+});
 
 const toggleViewTask = (val: Task) => {
   currentTask.value = val;
