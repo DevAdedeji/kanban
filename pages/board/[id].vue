@@ -27,6 +27,7 @@
         class="flex flex-col gap-4"
         :title="column.title"
         :cards="activeBoard[column.id]"
+        @change="tasksUpdated"
       />
     </div>
     <EditBoard
@@ -55,7 +56,7 @@ definePageMeta({
   middleware: ["user"],
 });
 const { showCreateTaskModal, showEditBoardModal, showDeleteModal } = useModal();
-const { boards, activeBoard, fetchingBoards } = useBoard();
+const { boards, activeBoard, fetchingBoards, updateBoardTasks } = useBoard();
 const { deleteBoard, deleting } = useDeleteBoard();
 const route = useRoute();
 const router = useRouter();
@@ -67,7 +68,6 @@ watch(boards, () => {
     const board = boards.value.find((board) => Number(board.id) === Number(id));
     if (board) {
       activeBoard.value = board;
-      console.log(activeBoard.value);
     } else {
       toast.add({
         title: "Board not found",
@@ -77,6 +77,10 @@ watch(boards, () => {
     }
   }
 });
+
+const tasksUpdated = () => {
+  updateBoardTasks();
+};
 
 onBeforeMount(() => {
   const id = route.params.id;

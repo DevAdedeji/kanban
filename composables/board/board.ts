@@ -7,6 +7,7 @@ const boards = ref<BoardType[]>([]);
 export const useBoard = () => {
   const client = useSupabaseClient();
   const user = useSupabaseUser();
+  const toast = useToast();
 
   const openBoard = (val: BoardType) => {
     activeBoard.value = val;
@@ -29,5 +30,28 @@ export const useBoard = () => {
     return { data, error };
   };
 
-  return { activeBoard, openBoard, fetchBoards, boards, fetchingBoards };
+  const updateBoardTasks = async () => {
+    const { data, error } = await client
+      .from("boards")
+      .upsert(activeBoard.value)
+      .select("*");
+    if (data) {
+      return;
+    }
+    if (error) {
+      toast.add({
+        title: error.message || "Couldn't update task status, pls try again",
+        icon: "i-heroicons-x-circle",
+      });
+    }
+  };
+
+  return {
+    activeBoard,
+    openBoard,
+    fetchBoards,
+    boards,
+    fetchingBoards,
+    updateBoardTasks,
+  };
 };

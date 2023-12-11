@@ -18,7 +18,7 @@ import { type PropType } from "vue";
 import { type Task } from "../helper/type";
 defineProps({
   task: {
-    type: Object as PropType<Task>,
+    type: Object as PropType<Task> | null,
     required: true,
   },
 });

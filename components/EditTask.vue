@@ -5,7 +5,7 @@
         class="bg-white dark:bg-dark_gray w-[90vw] sm:w-[480px] p-6 rounded-md"
       >
         <p class="text-lg text-black dark:text-white font-semibold">
-          Add new Task
+          Edit Task
         </p>
         <form class="py-6 flex flex-col gap-6" @submit.prevent="submitForm">
           <div class="form-box">
@@ -33,7 +33,7 @@
               cols="30"
               rows="5"
               placeholder="e.g. It’s always good to take a break. This 15 minute break will 
-recharge the batteries a little."
+  recharge the batteries a little."
               class="text-black dark:text-white"
               :class="{ '!border-red !border': $v.description.$error }"
             />
@@ -41,25 +41,13 @@ recharge the batteries a little."
               Description is required
             </span>
           </div>
-          <div class="form-box">
-            <label for="status">Status</label>
-            <CustomKSelect
-              :options="statusOptions"
-              :error="$v.status.$error"
-              :value="null"
-              @select="statusSelected"
-            />
-            <span v-if="$v.status.$error" class="text-xs text-red">
-              Status is required
-            </span>
-          </div>
           <CustomKButton
             variant="primary"
             size="lg"
             class="w-full"
-            :is-loading="creating"
+            :is-loading="editing"
           >
-            <p class="text-white text-sm">Create Task</p>
+            <p class="text-white text-sm">Save changes</p>
           </CustomKButton>
         </form>
       </div>
@@ -70,38 +58,25 @@ recharge the batteries a little."
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import { type PropType } from "vue";
+import { type Task } from "../helper/type";
 
 defineEmits(["close-modal"]);
 
-const { form, createTask, creating } = useCreateTask();
+const props = defineProps({
+  task: {
+    type: (Object as PropType<Task>) || null,
+    required: true,
+  },
+});
 
-interface Option {
-  value: string;
-  label: string;
-}
+const { form, editTask, editing } = useEditTask();
 
 const show = ref<boolean>(true);
-const statusOptions = ref([
-  {
-    label: "Todo",
-    value: "todo",
-  },
-  {
-    label: "In Progress",
-    value: "inprogress",
-  },
-  {
-    label: "Done",
-    value: "done",
-  },
-]);
-
-const statusSelected = (val: Option) => {
-  form.status = val.value;
-};
 
 const rules = computed(() => {
   return {
+    id: { required },
     title: { required },
     description: { required },
     status: { required },
@@ -113,7 +88,13 @@ const $v = useVuelidate(rules, form);
 const submitForm = async () => {
   const isFormCorrect = await $v.value.$validate();
   if (isFormCorrect) {
-    createTask();
+    editTask();
   }
 };
+
+onBeforeMount(() => {
+  if (props.task) {
+    form.value = props.task;
+  }
+});
 </script>

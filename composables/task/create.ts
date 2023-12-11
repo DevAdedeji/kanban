@@ -20,18 +20,18 @@ export const useCreateTask = () => {
   const createTask = async () => {
     if (activeBoard.value) {
       creating.value = true;
-      const columnToBeUpdated = activeBoard.value[form.status];
+      // So as to lose its reactivity
+      const board = reactive(JSON.parse(JSON.stringify(activeBoard.value)));
+      const columnToBeUpdated = board[form.status];
       columnToBeUpdated.push(form);
-      activeBoard.value[form.status] = columnToBeUpdated;
-      const { error } = await client
-        .from("boards")
-        .update(activeBoard.value)
-        .eq("id", id);
+      board[form.status] = columnToBeUpdated;
+      const { error } = await client.from("boards").update(board).eq("id", id);
       if (!error) {
         toast.add({
           title: "Task created successfully",
           icon: "i-heroicons-check-circle",
         });
+        activeBoard.value = board;
         toggleCreateTaskModal();
       } else {
         toast.add({

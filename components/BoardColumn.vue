@@ -16,14 +16,38 @@
       @change="updateParent"
     >
       <template #item="{ element }">
-        <BoardCard :id="element.id" :task="element" />
+        <BoardCard
+          :id="element.id"
+          :task="element"
+          @click="toggleViewTask(element)"
+        />
       </template>
     </draggable>
+    <ViewTask
+      v-if="showViewTaskModal && currentTask"
+      :task="currentTask"
+      @close-modal="showViewTaskModal = false"
+      @delete-task="showDeleteModal = true"
+    />
+    <EditTask
+      v-if="showEditTaskModal && currentTask"
+      :task="currentTask"
+      @close-modal="showEditTaskModal = false"
+    />
+    <CustomKDelete
+      v-if="showDeleteModal && currentTask"
+      :is-loading="deleting"
+      title="Delete Task?"
+      :desc="`Are you sure you want to delete the ‘${currentTask.title}’  This action cannot be reversed`"
+      @close-modal="showDeleteModal = false"
+      @delete="deleteTask(currentTask)"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+import { type Task } from "~/helper/type";
+defineProps({
   cards: {
     default: () => [],
     type: Array,
@@ -35,7 +59,16 @@ const props = defineProps({
 });
 const emit = defineEmits(["change"]);
 
+const { deleteTask, deleting } = useDeleteTask();
+const { showDeleteModal, showViewTaskModal, showEditTaskModal } = useModal();
+
+const currentTask = ref<Task | null>(null);
+
+const toggleViewTask = (val: Task) => {
+  currentTask.value = val;
+  showViewTaskModal.value = true;
+};
 const updateParent = (_e: Event) => {
-  emit("change", { type: props.title, data: props.cards });
+  emit("change");
 };
 </script>

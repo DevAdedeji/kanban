@@ -40,6 +40,7 @@ interface Option {
 interface SelectProps {
   options: Option[];
   error: Boolean;
+  value: Option | null;
 }
 
 const props = defineProps<SelectProps>();
@@ -58,6 +59,12 @@ const selectOption = (val: Option) => {
 };
 onClickOutside(target, (_event) => {
   showOptions.value = false;
+});
+
+onBeforeMount(() => {
+  if (props.value) {
+    selected.value = props.value;
+  }
 });
 </script>
 
