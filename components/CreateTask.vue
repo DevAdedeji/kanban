@@ -83,11 +83,11 @@ interface Option {
 const show = ref<boolean>(true);
 const statusOptions = ref([
   {
-    label: "Todo",
+    label: "To do",
     value: "todo",
   },
   {
-    label: "In Progress",
+    label: "In progress",
     value: "inprogress",
   },
   {

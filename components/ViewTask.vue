@@ -77,11 +77,11 @@ const showBoardOptions = ref<boolean>(false);
 const status = ref<Option | null>(null);
 const statusOptions = ref([
   {
-    label: "Todo",
+    label: "To do",
     value: "todo",
   },
   {
-    label: "In Progress",
+    label: "In progress",
     value: "inprogress",
   },
   {
@@ -113,6 +113,7 @@ const statusSelected = (val: Option) => {
 };
 
 onBeforeMount(() => {
+    console.log(props.task);
   const currentStatus = statusOptions.value.find(
     (status: Option) => status.value === props.task.status,
   );

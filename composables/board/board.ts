@@ -1,4 +1,5 @@
-import { type BoardType } from "~/helper/type";
+import { type BoardType, type Task } from "~/helper/type";
+import { columns } from "~/helper/data";
 
 const activeBoard = ref<BoardType | null>(null);
 const fetchingBoards = ref<boolean>(false);
@@ -31,11 +32,21 @@ export const useBoard = () => {
   };
 
   const updateBoardTasks = async () => {
+    // So as to lose its reactivity
+    const board = reactive(JSON.parse(JSON.stringify(activeBoard.value)));
+    columns.forEach((column) => {
+      if (board[column.id].length > 0) {
+        board[column.id].forEach((task: Task) => {
+          task.status = column.id;
+        });
+      }
+    });
     const { data, error } = await client
       .from("boards")
-      .upsert(activeBoard.value)
+      .upsert(board)
       .select("*");
     if (data) {
+      activeBoard.value = board;
       return;
     }
     if (error) {

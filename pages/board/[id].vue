@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { columns } from "~/helper/data";
+import { columns } from "~/helper/data";;
 definePageMeta({
   layout: "dashboard",
   middleware: ["user"],
