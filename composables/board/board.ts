@@ -29,5 +29,5 @@ export const useBoard = () => {
     return { data, error };
   };
 
-  return { activeBoard, openBoard, fetchBoards, boards };
+  return { activeBoard, openBoard, fetchBoards, boards, fetchingBoards };
 };
