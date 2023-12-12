@@ -1,5 +1,9 @@
 <template>
-  <button class="flex items-center justify-center gap-2" :class="buttonStyle">
+  <button
+    class="flex items-center justify-center gap-2"
+    :class="buttonStyle"
+    :disabled="isLoading"
+  >
     <span v-if="isLoading" class="loader"></span>
     <slot />
   </button>
@@ -24,11 +28,17 @@ const props = defineProps({
 const buttonStyle = computed(() => {
   let style = "";
   if (props.variant === "primary") {
-    style += "bg-blue hover:bg-light_blue";
+    style += `${
+      props.isLoading ? "bg-light_blue cursor-not-allowed" : "bg-blue "
+    } hover:bg-light_blue`;
   } else if (props.variant === "secondary") {
-    style += "bg-[#EFEFF9] hover:bg-[#D8D7F1]";
+    style += `${
+      props.isLoading ? "bg-[#D8D7F1] cursor-not-allowed" : "bg-[#EFEFF9]"
+    } hover:bg-[#D8D7F1]`;
   } else if (props.variant === "danger") {
-    style += "bg-red hover:bg-light_red";
+    style += `${
+      props.isLoading ? "bg-light_red cursor-not-allowed" : "bg-red"
+    } hover:bg-light_red`;
   }
   if (props.size === "sm") {
     style += " py-2 px-4 sm:px-6 rounded-2xl";
@@ -54,6 +64,13 @@ const buttonStyle = computed(() => {
 @keyframes rotation {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .loader {
+    width: 14px;
+    height: 14px;
   }
 }
 </style>
