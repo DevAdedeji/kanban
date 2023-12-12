@@ -4,7 +4,7 @@ export const useDeleteBoard = () => {
   const { activeBoard, fetchBoards } = useBoard();
   const route = useRoute();
   const router = useRouter();
-  const { toggleDeleteModal } = useModal();
+  const { toggleDeleteBoardModal } = useModal();
   const deleting = ref<boolean>(false);
 
   const deleteBoard = async () => {
@@ -19,7 +19,8 @@ export const useDeleteBoard = () => {
         icon: "i-heroicons-check-circle",
       });
       fetchBoards();
-      toggleDeleteModal();
+      toggleDeleteBoardModal();
+      deleting.value = false;
       router.push("/board/demo");
     } else {
       toast.add({

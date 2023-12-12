@@ -39,11 +39,11 @@
       @close-modal="showCreateTaskModal = false"
     />
     <CustomKDelete
-      v-if="showDeleteModal && activeBoard"
+      v-if="showDeleteBoardModal && activeBoard"
       :is-loading="deleting"
       title="Delete Modal?"
-      :desc="`Are you sure you want to delete the ‘${activeBoard.name}’ and its tasks? This action cannot be reversed`"
-      @close-modal="showDeleteModal = false"
+      :desc="`Are you sure you want to delete the ‘${activeBoard.name}’ board and its tasks? This action cannot be reversed`"
+      @close-modal="showDeleteBoardModal = false"
       @delete="deleteBoard"
     />
   </main>
@@ -55,7 +55,8 @@ definePageMeta({
   layout: "dashboard",
   middleware: ["user"],
 });
-const { showCreateTaskModal, showEditBoardModal, showDeleteModal } = useModal();
+const { showCreateTaskModal, showEditBoardModal, showDeleteBoardModal } =
+  useModal();
 const { boards, activeBoard, fetchingBoards, updateBoardTasks } = useBoard();
 const { deleteBoard, deleting } = useDeleteBoard();
 const route = useRoute();

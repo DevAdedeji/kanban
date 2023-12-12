@@ -30,7 +30,7 @@
       v-if="showViewTaskModal && currentTask"
       :task="currentTask"
       @close-modal="showViewTaskModal = false"
-      @delete-task="showDeleteModal = true"
+      @delete-task="showDeleteTaskModal = true"
     />
     <EditTask
       v-if="showEditTaskModal && currentTask"
@@ -38,11 +38,11 @@
       @close-modal="showEditTaskModal = false"
     />
     <CustomKDelete
-      v-if="showDeleteModal && currentTask"
+      v-if="showDeleteTaskModal && currentTask"
       :is-loading="deleting"
       title="Delete Task?"
-      :desc="`Are you sure you want to delete the ‘${currentTask.title}’  This action cannot be reversed`"
-      @close-modal="showDeleteModal = false"
+      :desc="`Are you sure you want to delete the ‘${currentTask.title}’ task, This action cannot be reversed`"
+      @close-modal="showDeleteTaskModal = false"
       @delete="deleteTask(currentTask)"
     />
   </div>
@@ -63,7 +63,8 @@ const props = defineProps({
 const emit = defineEmits(["change"]);
 
 const { deleteTask, deleting } = useDeleteTask();
-const { showDeleteModal, showViewTaskModal, showEditTaskModal } = useModal();
+const { showDeleteTaskModal, showViewTaskModal, showEditTaskModal } =
+  useModal();
 
 const currentTask = ref<Task | null>(null);
 

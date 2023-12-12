@@ -4,7 +4,7 @@ export const useDeleteTask = () => {
   const toast = useToast();
   const client = useSupabaseClient();
   const { activeBoard } = useBoard();
-  const { toggleViewTaskModal, toggleDeleteModal } = useModal();
+  const { toggleViewTaskModal, toggleDeleteTaskModal } = useModal();
   const route = useRoute();
   const deleting = ref<boolean>(false);
 
@@ -26,7 +26,8 @@ export const useDeleteTask = () => {
           icon: "i-heroicons-check-circle",
         });
         activeBoard.value = board;
-        toggleDeleteModal();
+        deleting.value = false;
+        toggleDeleteTaskModal();
         toggleViewTaskModal();
       } else {
         toast.add({
@@ -34,6 +35,7 @@ export const useDeleteTask = () => {
           icon: "i-heroicons-x-circle",
         });
       }
+      deleting.value = false;
     }
   };
   return { deleteTask, deleting };

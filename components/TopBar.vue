@@ -62,7 +62,7 @@
         <li>
           <button
             class="text-red text-base md:text-sm"
-            @click="toggleDeleteModal"
+            @click="toggleDeleteBoardModal"
           >
             Delete board
           </button>
@@ -209,7 +209,7 @@ const route = useRoute();
 const {
   toggleCreateTaskModal,
   toggleEditBoardModal,
-  toggleDeleteModal,
+  toggleDeleteBoardModal,
   toggleCreateBoardModal,
 } = useModal();
 const { activeBoard, boards } = useBoard();
