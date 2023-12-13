@@ -60,7 +60,6 @@ const { showCreateTaskModal, showEditBoardModal, showDeleteBoardModal } =
 const { boards, activeBoard, fetchingBoards, updateBoardTasks } = useBoard();
 const { deleteBoard, deleting } = useDeleteBoard();
 const route = useRoute();
-const router = useRouter();
 const toast = useToast();
 
 watch(boards, () => {
@@ -74,7 +73,7 @@ watch(boards, () => {
         title: "Board not found",
         icon: "i-heroicons-x-circle",
       });
-      router.push("/board/demo");
+      navigateTo("/board/demo");
     }
   }
 });

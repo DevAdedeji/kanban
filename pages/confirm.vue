@@ -22,10 +22,9 @@
 definePageMeta({
   middleware: ["user"],
 });
-const router = useRouter();
 onBeforeMount(() => {
   setTimeout(() => {
-    router.push("/board/demo");
+    navigateTo("/board/demo");
   }, 2000);
 });
 </script>

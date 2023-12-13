@@ -5,7 +5,6 @@ export const useCreateBoard = () => {
   const { boards, activeBoard } = useBoard();
   const { toggleCreateBoardModal } = useModal();
   const creating = ref<boolean>(false);
-  const router = useRouter();
 
   const form = reactive({
     name: "",
@@ -26,7 +25,7 @@ export const useCreateBoard = () => {
       boards.value.push(data[0]);
       activeBoard.value = data[0];
       toggleCreateBoardModal();
-      router.push(`/board/${activeBoard.value.id}`);
+      navigateTo(`/board/${activeBoard.value.id}`);
     }
     if (error) {
       toast.add({

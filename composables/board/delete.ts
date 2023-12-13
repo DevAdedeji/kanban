@@ -3,7 +3,6 @@ export const useDeleteBoard = () => {
   const client = useSupabaseClient();
   const { activeBoard, fetchBoards } = useBoard();
   const route = useRoute();
-  const router = useRouter();
   const { toggleDeleteBoardModal } = useModal();
   const deleting = ref<boolean>(false);
 
@@ -21,7 +20,7 @@ export const useDeleteBoard = () => {
       fetchBoards();
       toggleDeleteBoardModal();
       deleting.value = false;
-      router.push("/board/demo");
+      navigateTo("/board/demo");
     } else {
       toast.add({
         title: error.message || "Couldn't delete board, pls try again later",
