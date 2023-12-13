@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 export const useCreateTask = () => {
-  const { activeBoard } = useBoard();
+  const { activeBoard, updateCurrentBoard } = useBoard();
   const { toggleCreateTaskModal } = useModal();
   const toast = useToast();
   const client = useSupabaseClient();
@@ -27,6 +27,7 @@ export const useCreateTask = () => {
       board[form.status] = columnToBeUpdated;
       const { error } = await client.from("boards").update(board).eq("id", id);
       if (!error) {
+        updateCurrentBoard(id);
         toast.add({
           title: "Task created successfully",
           icon: "i-heroicons-check-circle",

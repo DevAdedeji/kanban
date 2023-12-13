@@ -3,7 +3,7 @@ import { type Task } from "~/helper/type";
 export const useDeleteTask = () => {
   const toast = useToast();
   const client = useSupabaseClient();
-  const { activeBoard } = useBoard();
+  const { activeBoard, updateCurrentBoard } = useBoard();
   const { toggleViewTaskModal, toggleDeleteTaskModal } = useModal();
   const route = useRoute();
   const deleting = ref<boolean>(false);
@@ -21,6 +21,7 @@ export const useDeleteTask = () => {
       board[task.status] = updatedColumn;
       const { error } = await client.from("boards").update(board).eq("id", id);
       if (!error) {
+        updateCurrentBoard(id);
         toast.add({
           title: "Task deleted successfully",
           icon: "i-heroicons-check-circle",

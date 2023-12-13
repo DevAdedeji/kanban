@@ -3,7 +3,7 @@ import { type Task } from "~/helper/type";
 export const useEditTask = () => {
   const toast = useToast();
   const client = useSupabaseClient();
-  const { activeBoard } = useBoard();
+  const { activeBoard, updateCurrentBoard } = useBoard();
   const route = useRoute();
   const { toggleEditTaskModal } = useModal();
 
@@ -68,6 +68,7 @@ export const useEditTask = () => {
         .upsert(board)
         .select("*");
       if (data) {
+        updateCurrentBoard(id);
         activeBoard.value = board;
         toast.add({
           title: "Task updated successfully",

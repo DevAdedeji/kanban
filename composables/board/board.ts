@@ -57,6 +57,26 @@ export const useBoard = () => {
     }
   };
 
+  const updateCurrentBoard = async (id: string | string[]) => {
+    const { data } = await useAsyncData("boards", async () => {
+      const data = await client
+        .from("boards")
+        .select("*")
+        .eq("user_id", user.value ? user.value.id : "")
+        .order("created_at");
+      return data.data as unknown as BoardType[];
+    });
+    if (data.value) {
+      boards.value = data.value;
+      const currentBoard = boards.value.find(
+        (board: BoardType) => board.id === id,
+      );
+      if (currentBoard) {
+        activeBoard.value = currentBoard;
+      }
+    }
+  };
+
   return {
     activeBoard,
     openBoard,
@@ -64,5 +84,6 @@ export const useBoard = () => {
     boards,
     fetchingBoards,
     updateBoardTasks,
+    updateCurrentBoard,
   };
 };
