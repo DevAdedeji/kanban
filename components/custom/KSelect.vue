@@ -1,7 +1,7 @@
 <template>
   <div ref="target" class="relative">
-    <div
-      class="h-10 rounded border p-2 cursor-pointer flex items-center justify-between"
+    <button
+      class="h-10 w-full rounded border p-2 cursor-pointer flex items-center justify-between"
       :class="[
         showOptions ? 'border-blue' : 'border-[#979797]',
         error ? '!border-red !border' : '',
@@ -12,7 +12,7 @@
         {{ selected ? selected.label : "Select an option" }}
       </p>
       <IconsArrowDown />
-    </div>
+    </button>
     <div
       v-if="showOptions"
       class="absolute top-12 left-0 right-0 z-10 bg-white dark:bg-black overflow-hidden shadow-xl border border-light_gray dark:border-none dark:border-[#979797] rounded-lg"
@@ -24,7 +24,7 @@
           class="p-2 border-b dark:border-none border-light_gray dark:border-[#979797] hover:bg-light_gray hover:dark:bg-dark_gray cursor-pointer text-sm"
           @click="selectOption(option)"
         >
-          {{ option.label }}
+          <button class="w-full h-full text-left">{{ option.label }}</button>
         </li>
       </ul>
     </div>
