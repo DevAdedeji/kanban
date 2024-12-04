@@ -1,3 +1,5 @@
+import { type BoardForm } from "~/helper/type";
+
 export const useCreateBoard = () => {
   const toast = useToast();
   const client = useSupabaseClient();
@@ -6,9 +8,9 @@ export const useCreateBoard = () => {
   const { toggleCreateBoardModal } = useModal();
   const creating = ref<boolean>(false);
 
-  const form = reactive({
+  const form = reactive<BoardForm>({
     name: "",
-    user_id: user.value?.id,
+    user_id: user.value ? user.value.id : "",
   });
 
   const createBoard = async () => {

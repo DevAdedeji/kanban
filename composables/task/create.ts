@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { type TaskForm } from "~/helper/type";
 
 export const useCreateTask = () => {
   const { activeBoard, updateCurrentBoard } = useBoard();
@@ -8,7 +9,7 @@ export const useCreateTask = () => {
   const route = useRoute();
   const creating = ref<boolean>(false);
 
-  const form = reactive({
+  const form = reactive<TaskForm>({
     id: uuidv4(),
     title: "",
     description: "",
